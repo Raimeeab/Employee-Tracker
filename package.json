@@ -1,0 +1,25 @@
+{
+  "name": "Employee-Tracker",
+  "version": "1.0.0",
+  "description": "<img alt=\"GitHub Followers\" src=\"https://img.shields.io/github/followers/Raimeeab\"> <img alt=\"GitHub License\" src=\"https://img.shields.io/apm/l/vim-mode\">  <img alt=\"GitHub Language Count\" src=\"https://img.shields.io/github/languages/count/Raimeeab/Employee-Tracker\">  <img alt=\"GitHub Commit Activity\" src=\"https://img.shields.io/github/commit-activity/w/Raimeeab/Employee-Tracker\">",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raimeeab/Employee-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raimeeab/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/Raimeeab/Employee-Tracker#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3-rc.0"
+  }
+}
