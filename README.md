@@ -22,8 +22,9 @@ A command line Content Management System (CMS) interface that allows users to in
 <a name="technologies"></a>
 ## 🕹 Technologies used 
 
-- MySQL, 
+- MySQL
 - JavaScript 
+- Console.table 
 - Inquirer 
 
 <a name="installation"></a>
