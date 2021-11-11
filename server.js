@@ -31,9 +31,25 @@ userPrompts = () => {
         type: "list",
         name: "Welcome to your Employee Tracker, what would you like to do?",
         choices: ["View all departments", "View all roles",
-                    "View all employees", "Add a Department",
-                    "Add a role", "Add an employee", "More choices"]
-    });
+                "View all employees", "Add a Department",
+                "Add a role", "Add an employee", "More choices"]
+    }).then((choices) => {
+        if(choices === "View all departments"){
+
+        } else if (choices === "View all roles"){
+
+        } else if (choices === "View all employees"){
+
+        } else if (choices === "Add a Department"){
+
+        } else if (choices === "Add a role"){
+
+        } else if (choices === "Add an employee"){
+
+        } else if (choices === "More choices"){
+            moreChoices();
+        }
+    })
 };
 
 init = () => {
@@ -48,4 +64,27 @@ init = () => {
 
 init();
 
+
+moreChoices = () => {
+    inquirer.prompt({
+        type: "list",
+        name: "More choices:",
+        choices: ["Update employee managers", "View employees by manager",
+                "View employees by departments", "Delete department, role, or employee",
+                "View the total utlizied budget of a department", "Go back"]
+    }).then((choices) => {
+        // Each choice will lead to a different function 
+        if(choices === "Update employee managers"){
+
+        } else if (choices === "View employees by manager"){
+
+        } else if (choices === "View employees by departments"){
+
+        } else if (choices === "Delete department, role, or employee"){
+
+        } else {
+            userPrompts();
+        }
+    })
+};
 // ENTRANCE of app  / EXIST 
