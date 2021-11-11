@@ -19,7 +19,7 @@ CREATE TABLE roles (
     -- Set salary to a decimal of up to 20 digits and 2 decimals 
     salary DECIMAL(20,2) NOT NULL, 
     department_id INT, 
-    -- 
+    -- Department ID relates to ID in departments table 
     FOREIGN KEY (department_id)
             REFERENCES departments(id)
             ON DELETE CASCADE 
