@@ -115,7 +115,7 @@ function addRole() {
         },
     ];
     prompt(addRole)
-    .then(({role}) => {
+    .then((role) => {
         console.log(role);
         db.createRole(role)
         .then(() => {
