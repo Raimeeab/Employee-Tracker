@@ -4,17 +4,43 @@ VALUES
     ("Maketing & Advertising"),
     ("IT"),
     ("Sales"),
-    ("Finance & Accounting")
+    ("Finance & Accounting"),
+    ("Human Resources")
 ;
     
 INSERT INTO roles (title, salary, department_id)
 VALUES 
-    ("Full Stack Engineer", 100000, 3),
-    ("Junior Developer", 65000, 3),
     ("Operations Manager", 90000, 1),
     ("Operations Assistant", 65000, 1),
+    ("Marketing Manager", 90000, 2),
+    ("Marketing Analyst", 80000, 2),
+    ("Marketing Assistant", 65000, 2),
+    ("Technical Budiness Analyst", 150000, 3),
+    ("Full Stack Engineer", 100000, 3),
+    ("Junior Developer", 65000, 3),
     ("Head of Sales", 85000, 4),
     ("Sales Associate", 55000, 4),
-    ("Marketing Assistant", 65000, 2),
-    ("Marketing Analyist", 80000, 2),
-    ("Marketing Manager", 90)
+    ("Finance Manager", 120000, 5),
+    ("Financial Accountant", 90000, 5),
+    ("Chief of Human Resources", 90000, 6),
+    ("Payroll Officer", 70000, 6)
+;
+
+
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+VALUES
+    ("Madeline", "Hopkins", 1, 368),
+    ("Helena", "Middleton", 2, NULL),
+    ("Ari", "Grey", 3, 428),
+    ("Chloe", "Green", 4, NULL),
+    ("Robert", "Waters", 5, NULL),
+    ("Ben", "Mattes", 6, 578),
+    ("Raimee", "Abbassi", 7, NULL),
+    ("Nick", "Smith", 8, NULL),
+    ("Josh", "George", 9, 625),
+    ("Georgia", "Brasch", 10, NULL),
+    ("Andrea", "Petrovik", 11, 289),
+    ("Yasmine", "Bawich", 12, NULL),
+    ("Philip", "Ghinone", 13, 112),
+    ("Anisha", "Dean", 14, NULL)
+;
