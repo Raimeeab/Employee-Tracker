@@ -11,7 +11,7 @@ const startMenu = async () => {
     const startQuestions = [{
         type: "list",
         name: "choice",
-        message: "Welcome to your Employee Tracker, what would you like to do?",
+        message: "What would you like to do?",
         choices: options
         
     }]
@@ -22,14 +22,18 @@ const startMenu = async () => {
         case "View all departments":
             await viewDepartments();
             break;
-        // case "View all roles"
 
-        // case "View all employees"
+        case "View all roles":
+            await viewRoles();
+            break;
+
+        case "View all employees":
+            await viewEmployees();
+            break;
 
         case "Add a Department":
             await addDepartment();
             break;
-
 
         default: 
             console.clear();
@@ -38,13 +42,29 @@ const startMenu = async () => {
     }
 }
 
-// startMenu();
-
 function viewDepartments() { 
     db.viewDepartments()
     .then(([rows]) => {
         let departments = rows;
         console.table(departments);
+    })
+    .then(() => startMenu());
+};
+
+function viewRoles() { 
+    db.viewRoles()
+    .then(([rows]) => {
+        let roles = rows;
+        console.table(roles);
+    })
+    .then(() => startMenu());
+};
+
+function viewEmployees() { 
+    db.viewEmployees()   
+    .then(([rows]) => {
+        let employees = rows;
+        console.table(employees);
     })
     .then(() => startMenu());
 };

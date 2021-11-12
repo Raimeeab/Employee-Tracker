@@ -11,34 +11,6 @@ const init = () => {
 }
 init();
 
-// // Basic functions
-// userPrompts = () => {
-//     inquirer.prompt({
-//         type: "list",
-//         name: "choice",
-//         message: "Welcome to your Employee Tracker, what would you like to do?",
-//         choices: ["View all departments", "View all roles",
-//                 "View all employees", "Add a Department",
-//                 "Add a role", "Add an employee", "More choices"]
-//     }).then(({choice}) => {
-//         if(choice === "View all departments"){
-
-//         } else if (choice === "View all roles"){
-
-//         } else if (choice === "View all employees"){
-
-//         } else if (choice === "Add a Department"){
-
-//         } else if (choice === "Add a role"){
-
-//         } else if (choice === "Add an employee"){
-
-//         } else if (choice === "More choices"){
-//             moreChoices();
-//         }
-//     })
-// };
-
 // // Additional funcitons
 // moreChoices = () => {
 //     inquirer.prompt({
@@ -63,8 +35,3 @@ init();
 //         }
 //     })
 // };
-
-
-
-// // Initialise application
-// ;
