@@ -5,7 +5,7 @@ require('console.table');
 const startMenu = async () => {
     const options = [
         "View all departments", "View all roles",
-        "View all employees", "Add a Department",
+        "View all employees", "Add a department",
         "Add a role", "Add an employee", "More choices", "Exit"
     ];
     const startQuestions = [{
@@ -31,8 +31,12 @@ const startMenu = async () => {
             await viewEmployees();
             break;
 
-        case "Add a Department":
+        case "Add a department":
             await addDepartment();
+            break;
+        
+        case "Add a role":
+            await addRole();
             break;
 
         default: 
@@ -42,6 +46,7 @@ const startMenu = async () => {
     }
 }
 
+// View departments
 function viewDepartments() { 
     db.viewDepartments()
     .then(([rows]) => {
@@ -51,6 +56,7 @@ function viewDepartments() {
     .then(() => startMenu());
 };
 
+// View roles
 function viewRoles() { 
     db.viewRoles()
     .then(([rows]) => {
@@ -60,6 +66,7 @@ function viewRoles() {
     .then(() => startMenu());
 };
 
+//  View employees
 function viewEmployees() { 
     db.viewEmployees()   
     .then(([rows]) => {
@@ -69,12 +76,13 @@ function viewEmployees() {
     .then(() => startMenu());
 };
 
+// Add a department
 function addDepartment() {
     const addDepartment = [{
         type: "text",
         name: "department",
-        message: "Add department?",        
-    }]
+        message: "What is the department name?",        
+    }];
     prompt(addDepartment)
     .then(({department}) => {
         console.log(department);
@@ -83,7 +91,38 @@ function addDepartment() {
             console.log(`Added Department ${department}`)
         })
         .then(() => startMenu());
-    })
-}
+    });
+};
+
+// Add a role
+function addRole() {
+    const addRole = [
+        {
+            type: "text",
+            name: "role",
+            message: "What is the title?",        
+        },
+        {
+            type: "text",
+            name: "salary",
+            message: "What is the salary?",
+        },
+        {
+            type: "text",
+            name: "departmentId",
+            message: "What is the department ID?",
+            default: "NULL"
+        },
+    ];
+    prompt(addRole)
+    .then(({role}) => {
+        console.log(role);
+        db.createRole(role)
+        .then(() => {
+            console.log(`Added role ${role}`)
+        })
+        .then(() => startMenu());
+    });
+};
 
 module.exports = { startMenu };

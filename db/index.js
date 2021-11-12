@@ -19,10 +19,16 @@ class DB {
     };
 
     createDepartment(department){
-        console.log(`About to insert ${department}`);
+        console.log(`About to insert ${department} into department table`);
         let strQuery = `INSERT INTO departments (department_name) VALUES ("${department}");`;
         return this.connection.promise().query(strQuery);
     };
+
+    createRole(role){
+        console.log(`About to insert ${role} into roles table`);
+        let strQuery = `INSERT INTO roles ("${role.title}", ${role.salary}, ${role.departmentId});`;
+        return this.connection.promise().query(strQuery);
+    }
 
 };
 
