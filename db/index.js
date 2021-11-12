@@ -26,7 +26,7 @@ class DB {
 
     createRole(role){
         console.log(`About to insert ${role} into roles table`);
-        let strQuery = `INSERT INTO roles VALUES ("${role.title}", ${role.salary}, ${role.departmentId});`;
+        let strQuery = `INSERT INTO roles (title, salary, department_id) VALUES ("${role.title}", ${role.salary}, ${role.departmentId});`;
         return this.connection.promise().query(strQuery);
     }
 
