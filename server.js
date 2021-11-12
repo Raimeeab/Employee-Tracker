@@ -17,7 +17,7 @@ init();
 //         type: "list",
 //         name: "moreChoice",
 //         message: "More choices:",
-//         choices: ["Update employee managers", "View employees by manager",
+//         choices: [ "Update employee managers", "View employees by manager",
 //                 "View employees by departments", "Delete department, role, or employee",
 //                 "View the total utlizied budget of a department", "Go back"]
 //     }).then(({moreChoice}) => {
