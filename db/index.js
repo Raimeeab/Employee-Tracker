@@ -46,13 +46,17 @@ class DB {
 
     updateEmployeeDb(selectedEmployee, newRole){
         let strQuery = `UPDATE employees SET role_id=${newRole.roleId}
-                            WHERE id=${selectedEmployee.employeeId};
-                        SELECT employees.id AS employee_id , employees.first_name, employees.last_name, roles.id AS role_id, roles.title  
-                            FROM employees
-                            JOIN roles
-                            ON employees.role_id = roles.id;`
+                            WHERE id=${selectedEmployee.employeeId};`
         return this.connection.promise().query(strQuery);
     };
+
+    showEmployeeRole(){
+        let strQuery = `SELECT employees.id AS employee_id , employees.first_name, employees.last_name, roles.title  
+                        FROM employees
+                        JOIN roles
+                        ON employees.role_id = roles.id;`
+        return this.connection.promise().query(strQuery);
+    }
 };
 
 module.exports = new DB(connection);
