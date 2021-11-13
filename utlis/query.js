@@ -255,33 +255,7 @@ function updateEmployee() {
 
     // })
 }
-    // .then((employeeNames) => {
-    //     const pickedEmployee = employeeNames.name;
-    // });
-    //     const employeeNames = [
-    //         {
-    //             type: "list",
-    //             name: "update",
-    //             message: "Which employee would you like to update?",
-    //             choices: 
-    //                 employees.map((employees) => {
-    //                     return {
-    //                         name: employees.first_name + " " + employees.last_name,
-    //                         value: employees.id
-    //                     }
-    //                 })
-    //         },
-           
-    //     ]
-    // })
-    // .then((employeeNames) => {
-    //     const pickedEmployee = employeeNames.name;
 
-
-    // })
-    // .then()
-    // prompt()
-    //     .then()
 
 
 module.exports = { startMenu }
