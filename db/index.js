@@ -15,7 +15,11 @@ class DB {
     };
 
     viewEmployees(){
-        return this.connection.promise().query("SELECT * FROM employees;");
+        let strQuery = `  SELECT employees.employee_id, employees.first_name, employees.last_name, roles.title 
+                            FROM employees
+                            LEFT JOIN roles 
+                            ON employees.role_id = roles.role_id`
+        return this.connection.promise().query(strQuery);
     };
 
     createDepartment(department){
@@ -27,13 +31,13 @@ class DB {
 
     createRole(role){
         console.log(`About to insert ${role} into roles table`);
-        let strQuery = `INSERT INTO roles (id, title, salary, department_id) 
+        let strQuery = `INSERT INTO roles (role_id, title, salary, department_id) 
                             VALUES (${role.id}, "${role.role}", ${role.salary}, ${role.departmentId});`;
         return this.connection.promise().query(strQuery);
     };
 
     getManagers(){
-        let strQuery = `SELECT id, first_name, last_name, role_id 
+        let strQuery = `SELECT employee_id, first_name, last_name, role_id 
                             FROM employees WHERE manager_id IS NULL;`
         return this.connection.promise().query(strQuery);
     };
@@ -50,13 +54,13 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
-    showEmployeeRole(){
-        let strQuery = `SELECT employees.id AS employee_id , employees.first_name, employees.last_name, roles.title  
-                        FROM employees
-                        JOIN roles
-                        ON employees.role_id = roles.id;`
-        return this.connnection.promise().query(strQuery);
-    }
+    // showEmployeeRole(){
+    //     let strQuery = `SELECT employees.id AS employee_id , employees.first_name, employees.last_name, roles.title  
+    //                     FROM employees
+    //                     JOIN roles
+    //                     ON employees.role_id = roles.id;`
+    //     return this.connnection.promise().query(strQuery);
+    // }
 };
 
 module.exports = new DB(connection);
