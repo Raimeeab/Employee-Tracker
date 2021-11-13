@@ -211,32 +211,78 @@ function addEmployee() {
 // Update employee
 function updateEmployee() {
     db.viewEmployees()
-    .then(([employees]) => {
-
+    .then( (employees) => {
+        const employeesArray = [employees];
+        const employeeChoices = employeesArray.map((employees) => {
+            return { 
+                name: employees.first_name + " " + employees.last_name,
+                value: employees.id
+            }   
+        })
         const employeeNames = [
             {
                 type: "list",
                 name: "update",
                 message: "Which employee would you like to update?",
-                choices: 
-                    employees.map((employees) => {
-                        return {
-                            name: employees.first_name + " " + employees.last_name,
-                            value: employees.id
-                        }
-                    })
+                choices: employeeChoices
             },
-           
         ]
+        prompt(employeeNames)
+        // .then(([roles]) => {
+        //     db.viewRoles(roles);
+        //     const newRole = [
+        //         {
+        //             type: "list",
+        //             name: "newRole",
+        //             message: "What is their new role?",
+        //             choices: 
+        //                 // for every choice an array 
+        //             roles.map((role) => {
+        //                 // roles array contains all the coloumns & 
+        //                 return {
+        //                     name: role.title,
+        //                     value: role.id
+        //                 };
+        //             })
+        //         },
+        //     ]
+        // return newRole;
+        // })
     })
-    .then((employeeNames) => {
-        const pickedEmployee = employeeNames.name;
+    // prompt(newRole)
+    // .then((employeeNames) => {
+    //     const pickedEmployee = employeeNames.name;
 
 
-    })
-    .then()
-    prompt()
-        .then()
+    // })
 }
+    // .then((employeeNames) => {
+    //     const pickedEmployee = employeeNames.name;
+    // });
+    //     const employeeNames = [
+    //         {
+    //             type: "list",
+    //             name: "update",
+    //             message: "Which employee would you like to update?",
+    //             choices: 
+    //                 employees.map((employees) => {
+    //                     return {
+    //                         name: employees.first_name + " " + employees.last_name,
+    //                         value: employees.id
+    //                     }
+    //                 })
+    //         },
+           
+    //     ]
+    // })
+    // .then((employeeNames) => {
+    //     const pickedEmployee = employeeNames.name;
+
+
+    // })
+    // .then()
+    // prompt()
+    //     .then()
+
 
 module.exports = { startMenu }
