@@ -45,11 +45,16 @@ const startMenu = async () => {
             await addEmployee();
             break;
 
+        case "Update employee role":
+            await updateEmployee();
+            break;
+
         default: 
+            // Clear terminal & end function
             console.clear();
             console.log("Goodbye");
-            return; 
-    }
+        return; 
+    };
 }
 
 // View departments
@@ -133,27 +138,31 @@ function addRole() {
 
 // Add an employee
 function addEmployee() {
+
     //query db to display all managers 
     db.getManagers()
     .then(([rows]) => {
         let managers = rows;
+
         // query db to display all roles 
         db.viewRoles()
         .then(([roles]) => {
-            // console.table(roles);
-            // console.table(managers);
             const managerChoices = [
                 {
-                    name: "No Manager",
+                    // In the event that the added employee is a manager
+                    name: "No manager",
                     value: "NULL"
                 },
             ]
+
+            // Push all managers from db into managerChoice array
             managers.forEach((manager) => {
                 managerChoices.push({
                     name: manager.first_name  + " " + manager.last_name,
                     value: manager.id                  
                 });
             });
+
            const addEmployee = [
             {
                 type: "text",
@@ -195,7 +204,39 @@ function addEmployee() {
             })
             .then(() => startMenu());
             });
-        })
+        });
+    });
+};
+
+// Update employee
+function updateEmployee() {
+    db.viewEmployees()
+    .then(([employees]) => {
+
+        const employeeNames = [
+            {
+                type: "list",
+                name: "update",
+                message: "Which employee would you like to update?",
+                choices: 
+                    employees.map((employees) => {
+                        return {
+                            name: employees.first_name + " " + employees.last_name,
+                            value: employees.id
+                        }
+                    })
+            },
+           
+        ]
     })
+    .then((employeeNames) => {
+        const pickedEmployee = employeeNames.name;
+
+
+    })
+    .then()
+    prompt()
+        .then()
 }
+
 module.exports = { startMenu }

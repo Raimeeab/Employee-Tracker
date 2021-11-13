@@ -30,18 +30,20 @@ class DB {
         let strQuery = `INSERT INTO roles (title, salary, department_id) 
                             VALUES ("${role.role}", ${role.salary}, ${role.departmentId});`;
         return this.connection.promise().query(strQuery);
-    }
+    };
 
     getManagers(){
         let strQuery = `SELECT id, first_name, last_name, role_id FROM employees WHERE manager_id IS NULL;`
         return this.connection.promise().query(strQuery);
-    }
+    };
 
     createEmployee(employee){
         let strQuery = `INSERT INTO employees (first_name, last_name, role_id, manager_id) 
                         VALUES ("${employee.first}", "${employee.last}", ${employee.roleId}, ${employee.managerId});`;
         return this.connection.promise().query(strQuery);
-    }
+    };
+
+    
 };
 
 module.exports = new DB(connection);
