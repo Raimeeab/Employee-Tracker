@@ -55,7 +55,7 @@ class DB {
                         FROM employees
                         JOIN roles
                         ON employees.role_id = roles.id;`
-        return this.connection.promise().query(strQuery);
+        return this.connnection.promise().query(strQuery);
     }
 };
 

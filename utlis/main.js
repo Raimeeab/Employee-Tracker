@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
 const { getManagers, showEmployeeRole } = require('../db');
+// const { moreChoices } = require('./moreChoices');
+
 const db = require('../db');
 require('console.table');
 
@@ -11,13 +13,14 @@ const startMenu = async () => {
         "Add a role", "Add an employee", 
         "Update employee role", "More choices", "Exit"
     ]; 
+
     const startQuestions = [{
         type: "list",
         name: "choice",
         message: "What would you like to do?",
         choices: options
         
-    }]
+    }];
 
     const answers = await prompt(startQuestions)
 
@@ -49,6 +52,10 @@ const startMenu = async () => {
         case "Update employee role":
             await updateEmployee();
             break;
+
+        // case "More choices": 
+        //     await moreChoices();
+        //     break;
 
         default: 
             // Clear terminal & end function
@@ -260,8 +267,7 @@ async function updateEmployee() {
     console.log(`Employee ID: ${selectedEmployee.employeeId} updated to role ID: ${newRole.roleId}`)
     await showEmployeeRole();
     await startMenu();
-}
-
+};
 
 
 module.exports = { startMenu }
