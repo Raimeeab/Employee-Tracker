@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
-const { getManagers, showEmployeeRole } = require('../db');
+// const { getManagers, showEmployeeRole } = require('../db');
 // const { moreChoices } = require('./moreChoices');
 
 const db = require('../db');
@@ -265,7 +265,7 @@ async function updateEmployee() {
     // console.table(newRole)
     await db.updateEmployeeDb(selectedEmployee, newRole)
     console.log(`Employee ID: ${selectedEmployee.employeeId} updated to role ID: ${newRole.roleId}`)
-    await showEmployeeRole();
+    await db.showEmployeeRole();
     await startMenu();
 };
 
