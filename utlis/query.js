@@ -1,3 +1,4 @@
+const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
 const { getManagers } = require('../db');
 const db = require('../db');
@@ -209,51 +210,48 @@ function addEmployee() {
 };
 
 // Update employee
-function updateEmployee() {
-    db.viewEmployees()
-    .then( (employees) => {
-        console.log(employees[0]);
-        // const employeesArray = [employees];
-        const employeeChoices = employees[0].map((employees) => {
-            return { 
-                name: employees.first_name + " " + employees.last_name,
-                value: employees.id
-            }   
-        })
-        const employeeNames = [
-            {
-                type: "list",
-                name: "update",
-                message: "Which employee would you like to update?",
-                choices: employeeChoices
-            },
-        ]
-        prompt(employeeNames)
-        .then((roles) => {
-            db.viewRoles()
-            const roleChoices = roles[0].map((role) => {
-                return {
-                    name: role.title,
-                    value: role.id
-                };
-            })
-            const newRole = [
-                {
-                    type: "list",
-                    name: "newRole",
-                    message: "What is their new role?",
-                    choices: roleChoices
-                },
-            ]
-            prompt(newRole)
-        })
-    })
-    // prompt(newRole)
-    // .then((employeeNames) => {
-    //     const pickedEmployee = employeeNames.name;
+async function updateEmployee() {
+    // create a const with value 
+    const employees =  await db.viewEmployees();
+    // console.table(employees[0]);
 
+    const employeeChoices =  employees[0].map((employees) => {
+        return { 
+            name: employees.first_name + " " + employees.last_name,
+            value: employees.id
+        }; 
+    });
 
-    // })
+    const selectedEmployee = await prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Which employee would you like to update?",
+            choices: employeeChoices
+        },
+    ]);
+
+    const roles = await db.viewRoles();
+    // console.table(roles[0]);
+
+    const roleChoices = roles[0].map((role) => {
+        return {
+            name: role.title,
+            value: role.id
+        }
+    });
+
+    const newRole = await prompt([
+        {
+            type: "list",
+            name: "newRole",
+            message: "What is their new role?",
+            choices: roleChoices
+        },
+    ]);
+
+    // console.log(`${selectedEmployee.name}'s role has been updated to ${newRole.title}`)
+    await db.updateEmployeeDb();
 }
 
 

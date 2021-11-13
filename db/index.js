@@ -44,10 +44,10 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
-    updateEmployee(){
-        let strQuery = `UPDATE employee SET role_id IS ${role.id} WHERE id `
+    updateEmployeeDb(){
+        let strQuery = `UPDATE employees SET role_id=${newRole} WHERE id=${selectedEmployee};`
         return this.connection.promise().query(strQuery);
-    }
+    };
 };
 
 module.exports = new DB(connection);
