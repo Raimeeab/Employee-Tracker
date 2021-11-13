@@ -27,8 +27,8 @@ class DB {
 
     createRole(role){
         console.log(`About to insert ${role} into roles table`);
-        let strQuery = `INSERT INTO roles (title, salary, department_id) 
-                            VALUES ("${role.role}", ${role.salary}, ${role.departmentId});`;
+        let strQuery = `INSERT INTO roles (id, title, salary, department_id) 
+                            VALUES (${role.id}, "${role.role}", ${role.salary}, ${role.departmentId});`;
         return this.connection.promise().query(strQuery);
     };
 
@@ -44,8 +44,12 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
-    updateEmployeeDb(){
-        let strQuery = `UPDATE employees SET role_id=${newRole} WHERE id=${selectedEmployee};`
+    updateEmployeeDb(selectedEmployee, newRole){
+        let strQuery = `UPDATE employees SET role_id=${newRole.roleId}
+                        WHERE id=${selectedEmployee.employeeId};
+             SELECT employees.id, employees.first_name, employees.last_name, roles.id, roles.title AS updated_employee 
+                FROM employees
+                JOIN roles`
         return this.connection.promise().query(strQuery);
     };
 };

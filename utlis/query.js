@@ -111,6 +111,11 @@ function addRole() {
     const addRole = [
         {
             type: "text",
+            name: "id",
+            message: "What is the role id?"
+        },
+        {
+            type: "text",
             name: "role",
             message: "What is the title?",        
         },
@@ -211,7 +216,6 @@ function addEmployee() {
 
 // Update employee
 async function updateEmployee() {
-    // create a const with value 
     const employees =  await db.viewEmployees();
     // console.table(employees[0]);
 
@@ -225,7 +229,7 @@ async function updateEmployee() {
     const selectedEmployee = await prompt([
         {
             type: "list",
-            name: "employee",
+            name: "employeeId",
             message: "Which employee would you like to update?",
             choices: employeeChoices
         },
@@ -244,14 +248,18 @@ async function updateEmployee() {
     const newRole = await prompt([
         {
             type: "list",
-            name: "newRole",
+            name: "roleId",
             message: "What is their new role?",
             choices: roleChoices
         },
     ]);
+    
+    // console.table(selectedEmployee)
+    // console.table(newRole)
+    await db.updateEmployeeDb(selectedEmployee, newRole)
+    console.log(`Employee ID: ${selectedEmployee.employeeId} updated to role ID: ${newRole.roleId}`)
 
-    // console.log(`${selectedEmployee.name}'s role has been updated to ${newRole.title}`)
-    await db.updateEmployeeDb();
+    await startMenu();
 }
 
 
