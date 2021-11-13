@@ -212,8 +212,9 @@ function addEmployee() {
 function updateEmployee() {
     db.viewEmployees()
     .then( (employees) => {
-        const employeesArray = [employees];
-        const employeeChoices = employeesArray.map((employees) => {
+        console.log(employees[0]);
+        // const employeesArray = [employees];
+        const employeeChoices = employees[0].map((employees) => {
             return { 
                 name: employees.first_name + " " + employees.last_name,
                 value: employees.id
@@ -228,26 +229,24 @@ function updateEmployee() {
             },
         ]
         prompt(employeeNames)
-        // .then(([roles]) => {
-        //     db.viewRoles(roles);
-        //     const newRole = [
-        //         {
-        //             type: "list",
-        //             name: "newRole",
-        //             message: "What is their new role?",
-        //             choices: 
-        //                 // for every choice an array 
-        //             roles.map((role) => {
-        //                 // roles array contains all the coloumns & 
-        //                 return {
-        //                     name: role.title,
-        //                     value: role.id
-        //                 };
-        //             })
-        //         },
-        //     ]
-        // return newRole;
-        // })
+        .then((roles) => {
+            db.viewRoles()
+            const roleChoices = roles[0].map((role) => {
+                return {
+                    name: role.title,
+                    value: role.id
+                };
+            })
+            const newRole = [
+                {
+                    type: "list",
+                    name: "newRole",
+                    message: "What is their new role?",
+                    choices: roleChoices
+                },
+            ]
+            prompt(newRole)
+        })
     })
     // prompt(newRole)
     // .then((employeeNames) => {

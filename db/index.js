@@ -33,7 +33,8 @@ class DB {
     };
 
     getManagers(){
-        let strQuery = `SELECT id, first_name, last_name, role_id FROM employees WHERE manager_id IS NULL;`
+        let strQuery = `SELECT id, first_name, last_name, role_id 
+                            FROM employees WHERE manager_id IS NULL;`
         return this.connection.promise().query(strQuery);
     };
 
@@ -43,7 +44,10 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
-    
+    updateEmployee(){
+        let strQuery = `UPDATE employee SET role_id IS ${role.id} WHERE id `
+        return this.connection.promise().query(strQuery);
+    }
 };
 
 module.exports = new DB(connection);
