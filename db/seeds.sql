@@ -8,7 +8,7 @@ VALUES
     ("Human Resources")
 ;
     
-INSERT INTO roles (role_id, title, salary, department_id)
+INSERT INTO roles (id, title, salary, department_id)
 VALUES 
     (10, "Operations Manager", 90000, 1),
     (20, "Operations Assistant", 65000, 1),
