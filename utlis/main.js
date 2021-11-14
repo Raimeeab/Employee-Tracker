@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
-// const { moreChoices } = require('./moreChoices');
+const { moreChoices } = require('./moreChoices');
 
 const db = require('../db');
 require('console.table');
@@ -52,9 +52,9 @@ const startMenu = async () => {
             await updateEmployee();
             break;
 
-        // case "More choices": 
-        //     await moreChoices();
-        //     break;
+        case "More choices": 
+            await moreChoices();
+            break;
 
         default: 
             // Clear terminal & end function
