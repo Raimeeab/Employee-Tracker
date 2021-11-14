@@ -108,11 +108,7 @@ function addDepartment() {
         .then(() => {
             console.log(`Added Department ${department}`)
         })
-        .then(() => {
-            console.log('reaching viewdepartment function');
-            db.viewDepartments();
-        })
-        .then(() => startMenu());
+        .then(() => viewDepartments());
     });
 };
 
@@ -148,8 +144,7 @@ function addRole() {
         .then(() => {
             console.log(`Added role ${role}`)
         })
-        .then(() => db.viewRoles())
-        .then(() => startMenu());
+        .then(() => viewRoles());
     });
 };
 
@@ -219,8 +214,8 @@ function addEmployee() {
             .then(() => {
                 console.log(`Added employee ${employee}`)
             })
-            .then(() => db.viewEmployees())
-            .then(() => startMenu());
+            .then(() => viewEmployees());
+
             });
         });
     });
@@ -270,8 +265,7 @@ async function updateEmployee() {
     // console.table(newRole)
     await db.updateEmployeeDb(selectedEmployee, newRole)
     console.log(`Employee ID: ${selectedEmployee.employeeId} updated to role ID: ${newRole.roleId}`)
-    await db.viewEmployees();
-    await startMenu();
+    await viewEmployees();
 };
 
 
