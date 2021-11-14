@@ -53,14 +53,7 @@ class DB {
                             WHERE id=${selectedEmployee.employeeId};`
         return this.connection.promise().query(strQuery);
     };
-
-    // showEmployeeRole(){
-    //     let strQuery = `SELECT employees.id AS employee_id , employees.first_name, employees.last_name, roles.title  
-    //                     FROM employees
-    //                     JOIN roles
-    //                     ON employees.role_id = roles.id;`
-    //     return this.connnection.promise().query(strQuery);
-    // }
+    
 };
 
 module.exports = new DB(connection);

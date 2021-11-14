@@ -14,7 +14,7 @@ CREATE TABLE departments (
 );
 
 CREATE TABLE roles (
-    id INTs PRIMARY KEY,
+    id INT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     -- Set salary to a decimal of up to 20 digits and 2 decimals 
     salary DECIMAL(20,2) NOT NULL, 

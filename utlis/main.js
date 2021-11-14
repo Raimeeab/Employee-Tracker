@@ -108,6 +108,10 @@ function addDepartment() {
         .then(() => {
             console.log(`Added Department ${department}`)
         })
+        .then(() => {
+            console.log('reaching viewdepartment function');
+            db.viewDepartments();
+        })
         .then(() => startMenu());
     });
 };
@@ -144,6 +148,7 @@ function addRole() {
         .then(() => {
             console.log(`Added role ${role}`)
         })
+        .then(() => db.viewRoles())
         .then(() => startMenu());
     });
 };
@@ -214,6 +219,7 @@ function addEmployee() {
             .then(() => {
                 console.log(`Added employee ${employee}`)
             })
+            .then(() => db.viewEmployees())
             .then(() => startMenu());
             });
         });
