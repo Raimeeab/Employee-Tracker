@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
-const { startMenu } = require('./main');
+// const { startMenu } = require('./main');
 
 const db = require('../db');
 require('console.table');
