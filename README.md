@@ -2,6 +2,9 @@
 
 # Employee-Tracker
 ---
+
+![relational-data](./assets/relational-database.png)
+
 ## Table of Content 
 
 * [Description](#description)
@@ -15,7 +18,7 @@
 
 <a name="description"></a>
 ## 📝 Description
-A command line Content Management System (CMS) interface that allows users to interact with and manipulate information sorted in a database. The aim of this project is to demonstrate my understanding of MySQL as well as improve my knowledge of Inquirer and node.js. 
+A command line Content Management System (CMS) interface that allows users to interact with and manipulate information sorted in a database. The aim of this project is to demonstrate my understanding of MySQL as well as improve my knowledge of Inquirer and node.js. I was also able to understand how relational databases operate and how to provide an intuitive way to store and access structured information to improve scalability, simplicity and data accuracy. 
 
 ![app-demo]()
 
@@ -33,7 +36,7 @@ A command line Content Management System (CMS) interface that allows users to in
 
 1. Git clone this repository onto your local machine and navigate to the file on your terminal. *This can also be done by opening the file on Visual Studios and running it through the intergated terminal.*
 
-![git-clone]()
+![git-clone](./assets/git-clone.gif)
 
 2. In order for the app to function correctly, ensure you have the latest or most stable version of Node.js and that you've entered your MySQL details into the `.env.Example` and that you rename the file to `.env`.
 
@@ -44,9 +47,8 @@ A command line Content Management System (CMS) interface that allows users to in
     - `npm install`
     - `npm run start`
 
-3. Once this is done, click on the link provided in your terminal, or use the link provided above.
+![install](./assets/install.gif)
 
-![install]()
 
 <a name="usage"></a>
 ## 🖥 Usage 
