@@ -264,7 +264,6 @@ async function updateEmployee() {
     // console.table(selectedEmployee)
     // console.table(newRole)
     await db.updateEmployeeDb(selectedEmployee, newRole)
-    console.log(`Employee ID: ${selectedEmployee.employeeId} updated to role ID: ${newRole.roleId}`)
     await viewEmployees();
 };
 

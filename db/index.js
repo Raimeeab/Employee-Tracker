@@ -54,11 +54,16 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
     
-    deleteDepartment(){
+    deleteDepartment(pickedDepartment){
+        let strQuery = `DELETE FROM departments WHERE id = ${pickedDepartment.departmentId};`
+        return this.connection.promise().query(strQuery);
+    };
+
+    deleteRole(pickedRole){
         console.log("Reached index.js")
-        let strQuery = `DELETE FROM departments WHERE id = ${pickedDepartment.departmentId}`
-        return this.connection.promise().query(strQuery)
-    }
+        let strQuery = `DELETE FROM roles WHERE id = ${pickedRole.roleId};`
+        return this.connection.promise().query(strQuery);
+    };
 
 };
 

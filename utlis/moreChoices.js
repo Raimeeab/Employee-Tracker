@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
-const { viewDepartments } = require('../db');
 
 const db = require('../db');
 require('console.table');
@@ -30,6 +29,12 @@ const moreChoices = async () => {
 
         case "Delete department":
             await deleteDepartment();
+                startMenu();
+            break;
+        
+        case "Delete role":
+            await deleteRole();
+                startMenu();
             break;
 
         default: 
@@ -58,12 +63,50 @@ const deleteDepartment = async () => {
             type: "list",
             name: "departmentId",
             message: "Which department would you like to delete?",
-            choices: departmentChoices 
+            choices: departmentChoices
         },
     ]);
-    console.log(pickedDepartment);
+
     await db.deleteDepartment(pickedDepartment);
-    await viewDepartments();
-}
+
+    // View departments again to show delete is successful 
+    await db.viewDepartments()
+    .then(([rows]) => {
+        let departments = rows; 
+        console.table(departments);
+    });
+};
+
+const deleteRole = async () => {
+
+    const roles = await db.viewRoles();
+
+    const roleChoices = roles[0].map((role) => {
+        return {
+            name: role.title, 
+            value: role.id
+        }
+    });
+
+    const pickedRole = await prompt([
+        {
+            type: "list",
+            name: "roleId",
+            message: "Which role would you like to delete?",
+            choices: roleChoices
+        }
+    ]);
+
+    await db.deleteRole(pickedRole);
+
+    await db.viewRoles()
+    .then(([rows]) => {
+        let roles = rows;
+        console.table(roles);
+    });
+
+};
+
+
 
 module.exports = { moreChoices }
