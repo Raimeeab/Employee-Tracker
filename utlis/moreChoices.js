@@ -37,6 +37,11 @@ const moreChoices = async () => {
                 startMenu();
             break;
 
+        case "Delete employee":
+            await deleteEmployee();
+                startMenu();
+            break;
+
         default: 
             // Clear terminal & end function
             console.clear();
@@ -48,7 +53,6 @@ const moreChoices = async () => {
 
 
 const deleteDepartment = async () => {
-
     const departments = await db.viewDepartments();
 
     const departmentChoices = departments[0].map((department) => {
@@ -78,7 +82,6 @@ const deleteDepartment = async () => {
 };
 
 const deleteRole = async () => {
-
     const roles = await db.viewRoles();
 
     const roleChoices = roles[0].map((role) => {
@@ -107,6 +110,33 @@ const deleteRole = async () => {
 
 };
 
+const deleteEmployee = async () => {
+    const employees = await db.viewEmployees();
 
+    const employeeChoices = employees[0].map((employee) => {
+        return {
+            name: employee.first_name + " " + employee.last_name,
+            value: employee.id 
+        }
+    });
+    
+    const pickedEmployee = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee would you like to delete?",
+            choices: employeeChoices
+        },
+    ]);
+
+    await db.deleteEmployee(pickedEmployee);
+
+    await db.viewEmployees()
+    .then(([rows]) => {
+        let employees = rows;
+        console.table(employees);
+    });
+
+};
 
 module.exports = { moreChoices }

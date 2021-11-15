@@ -60,8 +60,13 @@ class DB {
     };
 
     deleteRole(pickedRole){
-        console.log("Reached index.js")
         let strQuery = `DELETE FROM roles WHERE id = ${pickedRole.roleId};`
+        return this.connection.promise().query(strQuery);
+    };
+
+    deleteEmployee(pickedEmployee){
+        console.log("Reached index.js")
+        let strQuery = `DELETE FROM employees WHERE id = ${pickedEmployee.employeeId};`
         return this.connection.promise().query(strQuery);
     };
 
