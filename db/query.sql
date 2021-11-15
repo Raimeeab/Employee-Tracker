@@ -14,9 +14,6 @@
 --   ORDER BY employees.id;
 
 -- VIEW EMPLOYEES BY MANAGERS
-SELECT employees.id, employees.first_name, employees.last_name, departments.department_name
-  FROM employees 
-  LEFT JOIN employees.manager_id, employees.first_name, employees.last_name 
-  WHERE manager_id IS NULL
-  INNER JOIN departments ON roles.department_id = department.id 
-  WHERE employees.manager_id = employees.manager_id IS INT;
+-- SELECT employees.role_id, employees.first_name, employees.last_name
+-- FROM employees
+-- WHERE employees.manager_id = employee_id.id;

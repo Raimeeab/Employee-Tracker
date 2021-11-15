@@ -69,13 +69,11 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
-    employeeByDepartment(){
+    employeeByManager(pickedManager){
         console.log("Reached index.js")
-        let strQuery = `SELECT employees.first_name, employees.last_name, departments.department_name 
-                        AS departments FROM employees 
-                        JOIN roles ON employees.role_id = roles.id
-                        JOIN departments ON roles.department_id = departments.id
-                        ORDER BY employees.id;`
+        let strQuery = `SELECT employees.role_id, employees.first_name, employees.last_name
+                        FROM employees
+                        WHERE employees.manager_id = ${pickedManager.managerId}`
         return this.connection.promise().query(strQuery);
     }
 

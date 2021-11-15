@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
+const { end } = require('./displayArt');
 
 const db = require('../db');
 require('console.table');
@@ -9,7 +10,8 @@ const moreChoices = async () => {
         "Delete department", "Delete role", "Delete employee", 
         "View employees by manager", "View employees by departments",
         "Update employee managers",
-        "View the total utlizied budget of a department", "Go back"
+        "View the total utlizied budget of a department", "Go back", 
+        "Exit"
     ];
     
     const startQuestions = [{
@@ -57,7 +59,7 @@ const moreChoices = async () => {
         default: 
             // Clear terminal & end function
             console.clear();
-            console.log("Goodbye");
+            end();
         return; 
     };
 
@@ -175,14 +177,17 @@ const employeeByManager = async () => {
     const pickedManager = await prompt([
         {
             type: "list",
-            name: "manager",
+            name: "managerId",
             message: "Select the manager to see their employees:",
             choices: managerChoices
         },
     ]);
 
-    console.log(pickedManager);
-    // await db.viewEmployeeByManager()
+    await db.employeeByManager(pickedManager)
+    .then(([rows]) => {
+        let viewEmployeedByManager = rows;
+        console.table(viewEmployeedByManager);
+    });
 }
 
 module.exports = { moreChoices }

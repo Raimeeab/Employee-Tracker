@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
 const { moreChoices } = require('./moreChoices');
+const { end } = require('./displayArt');
 
 const db = require('../db');
 require('console.table');
@@ -59,7 +60,7 @@ const startMenu = async () => {
         default: 
             // Clear terminal & end function
             console.clear();
-            console.log("Goodbye");
+            end();
         return; 
     };
 }
@@ -150,75 +151,79 @@ function addRole() {
 
 // Add an employee
 function addEmployee() {
-
-    //query db to display all managers 
-    db.getManagers()
-    .then(([rows]) => {
-        let managers = rows;
-
-        // query db to display all roles 
-        db.viewRoles()
-        .then(([roles]) => {
-            const managerChoices = [
+    try {
+        
+        //query db to display all managers 
+        db.getManagers()
+        .then(([rows]) => {
+            let managers = rows;
+    
+            // query db to display all roles 
+            db.viewRoles()
+            .then(([roles]) => {
+                const managerChoices = [
+                    {
+                        // In the event that the added employee is a manager
+                        name: "No manager",
+                        value: "NULL"
+                    },
+                ]
+    
+                // Push all managers from db into managerChoice array
+                managers.forEach((manager) => {
+                    managerChoices.push({
+                        name: manager.first_name  + " " + manager.last_name,
+                        value: manager.id                  
+                    });
+                });
+    
+               const addEmployee = [
                 {
-                    // In the event that the added employee is a manager
-                    name: "No manager",
-                    value: "NULL"
+                    type: "text",
+                    name: "first",
+                    message: "What is the employee's first name?",        
                 },
-            ]
-
-            // Push all managers from db into managerChoice array
-            managers.forEach((manager) => {
-                managerChoices.push({
-                    name: manager.first_name  + " " + manager.last_name,
-                    value: manager.id                  
+                {
+                    type: "text",
+                    name: "last",
+                    message: "What is the employee's last name?",
+                },
+                {
+                    type: "list",
+                    name: "roleId",
+                    message: "What is the role?",
+                    choices: 
+                        // for every choice an array 
+                    roles.map((role) => {
+                        // roles array contains all the coloumns & 
+                        return {
+                            name: role.title,
+                            value: role.id
+                        };
+                    })
+                },
+                {
+                    type: "list",
+                    name: "managerId",
+                    message: "Who is the manager?",
+                    choices: managerChoices
+                },
+            ];  
+            prompt(addEmployee)
+            .then((employee) => {
+                console.log(employee);
+                db.createEmployee(employee)
+                .then(() => {
+                    console.log(`Added employee ${employee}`)
+                })
+                .then(() => viewEmployees());
+    
                 });
             });
-
-           const addEmployee = [
-            {
-                type: "text",
-                name: "first",
-                message: "What is the employee's first name?",        
-            },
-            {
-                type: "text",
-                name: "last",
-                message: "What is the employee's last name?",
-            },
-            {
-                type: "list",
-                name: "roleId",
-                message: "What is the role?",
-                choices: 
-                    // for every choice an array 
-                roles.map((role) => {
-                    // roles array contains all the coloumns & 
-                    return {
-                        name: role.title,
-                        value: role.id
-                    };
-                })
-            },
-            {
-                type: "list",
-                name: "managerId",
-                message: "Who is the manager?",
-                choices: managerChoices
-            },
-        ];  
-        prompt(addEmployee)
-        .then((employee) => {
-            console.log(employee);
-            db.createEmployee(employee)
-            .then(() => {
-                console.log(`Added employee ${employee}`)
-            })
-            .then(() => viewEmployees());
-
-            });
         });
-    });
+    } catch {
+        if(err) throw err; 
+    }
 };
 
 // Update employee
