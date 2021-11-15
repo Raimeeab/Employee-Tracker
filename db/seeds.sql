@@ -22,6 +22,7 @@ VALUES
     (100, "Finance Manager", 120000, 5),
     (110, "Chief of Human Resources", 90000, 6),
     (120, "Payroll Officer", 70000, 6)
+
 ;
 
 
@@ -32,11 +33,11 @@ VALUES
     ("Ari", "Grey", 30, NULL),
     ("Robert", "Waters", 40, 3),
     ("Ben", "Mattes", 50, NULL),
-    ("Raimee", "Abbassi", 60, 6),
-    ("Nick", "Smith", 70, 6),
+    ("Raimee", "Abbassi", 60, 5),
+    ("Nick", "Smith", 70, 5),
     ("Josh", "George", 80, NULL),
-    ("Georgia", "Brasch", 90, 9),
+    ("Georgia", "Brasch", 90, 8),
     ("Andrea", "Petrovik", 100, NULL),
-    ("Yasmine", "Bawich", 110, 11),
+    ("Yasmine", "Bawich", 110, 9),
     ("Philip", "Ghignone", 120, NULL)
 ;

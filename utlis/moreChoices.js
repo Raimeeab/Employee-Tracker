@@ -39,6 +39,11 @@ const moreChoices = async () => {
             await deleteEmployee();
             startMenu();
             break;
+
+        case "View employees by manager":
+            await employeeByManager();
+            startMenu();
+            break;
                     
         case "View employees by departments":
             await employeeByDepartment();
@@ -48,7 +53,7 @@ const moreChoices = async () => {
         case "Go back":
             await startMenu();
             break;
-            
+
         default: 
             // Clear terminal & end function
             console.clear();
@@ -152,5 +157,32 @@ const employeeByDepartment = async () => {
         console.table(viewEmployeeByDepartment);
     });
 };
+
+const employeeByManager = async () => {
+    const managerChoices = [];
+    
+    await db.getManagers()
+    .then(([rows]) => {
+        let managers = rows;
+        managers.forEach((manager) => {
+            managerChoices.push({
+                name: manager.first_name + " " + manager.last_name,
+                value: manager.id
+            });
+        });
+    });
+
+    const pickedManager = await prompt([
+        {
+            type: "list",
+            name: "manager",
+            message: "Select the manager to see their employees:",
+            choices: managerChoices
+        },
+    ]);
+
+    console.log(pickedManager);
+    // await db.viewEmployeeByManager()
+}
 
 module.exports = { moreChoices }
