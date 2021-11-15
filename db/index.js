@@ -74,6 +74,16 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
 
+    employeeByDepartment(){
+        let strQuery = `SELECT employees.first_name, employees.last_name, departments.department_name 
+                        AS departments FROM employees 
+                        JOIN roles ON employees.role_id = roles.id
+                        JOIN departments ON roles.department_id = departments.id
+                        ORDER BY employees.id;`
+        return this.connection.promise().query(strQuery);
+    }
+
+
 };
 
 module.exports = new DB(connection);
