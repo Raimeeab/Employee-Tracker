@@ -14,15 +14,14 @@ VALUES
     (20, "Operations Assistant", 65000, 1),
     (30, "Marketing Manager", 90000, 2),
     (40, "Marketing Analyst", 80000, 2),
-    (50, "Marketing Assistant", 65000, 2),
-    (60, "Technical Budiness Analyst", 150000, 3),
-    (70, "Full Stack Engineer", 100000, 3),
-    (80, "Junior Developer", 65000, 3),
-    (90, "Head of Sales", 85000, 4),
-    (100, "Sales Associate", 55000, 4),
-    (110, "Finance Manager", 120000, 5),
-    (120, "Chief of Human Resources", 90000, 6),
-    (130, "Payroll Officer", 70000, 6)
+    (50, "Technical Budiness Analyst", 150000, 3),
+    (60, "Full Stack Engineer", 100000, 3),
+    (70, "Junior Developer", 65000, 3),
+    (80, "Head of Sales", 85000, 4),
+    (90, "Sales Associate", 55000, 4),
+    (100, "Finance Manager", 120000, 5),
+    (110, "Chief of Human Resources", 90000, 6),
+    (120, "Payroll Officer", 70000, 6)
 ;
 
 
@@ -39,6 +38,5 @@ VALUES
     ("Georgia", "Brasch", 90, 9),
     ("Andrea", "Petrovik", 100, NULL),
     ("Yasmine", "Bawich", 110, 11),
-    ("Philip", "Ghignone", 120, NULL),
-    ("Anisha", "Dean", 130, 13)
+    ("Philip", "Ghignone", 120, NULL)
 ;

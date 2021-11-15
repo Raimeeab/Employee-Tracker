@@ -6,8 +6,9 @@ require('console.table');
 
 const moreChoices = async () => {
     const options = [
-        "Update employee managers", "View employees by manager",
-        "View employees by departments", "Delete department", "Delete role", "Delete employee",
+        "Delete department", "Delete role", "Delete employee", 
+        "View employees by manager", "View employees by departments",
+        "Update employee managers",
         "View the total utlizied budget of a department", "Go back"
     ];
     
@@ -23,25 +24,31 @@ const moreChoices = async () => {
     const answers = await prompt(startQuestions);
 
     switch(answers.choice) {
+        
+        case "Delete department":
+            await deleteDepartment();
+            startMenu();
+            break;
+            
+        case "Delete role":
+            await deleteRole();
+            startMenu();
+            break;
+                
+        case "Delete employee":
+            await deleteEmployee();
+            startMenu();
+            break;
+                    
+        case "View employees by departments":
+            await employeeByDepartment();
+            startMenu();
+            break;
+            
         case "Go back":
             await startMenu();
             break;
-
-        case "Delete department":
-            await deleteDepartment();
-                startMenu();
-            break;
-        
-        case "Delete role":
-            await deleteRole();
-                startMenu();
-            break;
-
-        case "Delete employee":
-            await deleteEmployee();
-                startMenu();
-            break;
-
+            
         default: 
             // Clear terminal & end function
             console.clear();
@@ -49,8 +56,7 @@ const moreChoices = async () => {
         return; 
     };
 
-}
-
+};
 
 const deleteDepartment = async () => {
     const departments = await db.viewDepartments();
@@ -137,6 +143,14 @@ const deleteEmployee = async () => {
         console.table(employees);
     });
 
+};
+
+const employeeByDepartment = async () => {
+    await db.employeeByDepartment()
+    .then(([rows]) => {
+        let viewEmployeeByDepartment = rows;
+        console.table(viewEmployeeByDepartment);
+    });
 };
 
 module.exports = { moreChoices }

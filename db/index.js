@@ -65,10 +65,19 @@ class DB {
     };
 
     deleteEmployee(pickedEmployee){
-        console.log("Reached index.js")
         let strQuery = `DELETE FROM employees WHERE id = ${pickedEmployee.employeeId};`
         return this.connection.promise().query(strQuery);
     };
+
+    employeeByDepartment(){
+        console.log("Reached index.js")
+        let strQuery = `SELECT employees.first_name, employees.last_name, departments.department_name 
+                        AS departments FROM employees 
+                        JOIN roles ON employees.role_id = roles.id
+                        JOIN departments ON roles.department_id = departments.id
+                        ORDER BY employees.id;`
+        return this.connection.promise().query(strQuery);
+    }
 
 };
 
