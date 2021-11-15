@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const { prompt } = require('inquirer');
+const { viewDepartments } = require('../db');
 
 const db = require('../db');
 require('console.table');
@@ -7,7 +8,7 @@ require('console.table');
 const moreChoices = async () => {
     const options = [
         "Update employee managers", "View employees by manager",
-        "View employees by departments", "Delete department, role, or employee",
+        "View employees by departments", "Delete department", "Delete role", "Delete employee",
         "View the total utlizied budget of a department", "Go back"
     ];
     
@@ -27,6 +28,10 @@ const moreChoices = async () => {
             await startMenu();
             break;
 
+        case "Delete department":
+            await deleteDepartment();
+            break;
+
         default: 
             // Clear terminal & end function
             console.clear();
@@ -36,5 +41,29 @@ const moreChoices = async () => {
 
 }
 
+
+const deleteDepartment = async () => {
+
+    const departments = await db.viewDepartments();
+
+    const departmentChoices = departments[0].map((department) => {
+        return {
+            name: department.department_name,
+            value: department.id
+        };
+    });
+
+    const pickedDepartment = await prompt([
+        {
+            type: "list",
+            name: "departmentId",
+            message: "Which department would you like to delete?",
+            choices: departmentChoices 
+        },
+    ]);
+    console.log(pickedDepartment);
+    await db.deleteDepartment(pickedDepartment);
+    await viewDepartments();
+}
 
 module.exports = { moreChoices }

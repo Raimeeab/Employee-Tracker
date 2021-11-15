@@ -23,9 +23,9 @@ A command line Content Management System (CMS) interface that allows users to in
 ## 🕹 Technologies used 
 
 - MySQL
-- JavaScript 
-- Console.table 
+- Node.js
 - Inquirer 
+- Console.table 
 
 <a name="installation"></a>
 ## ⚙️ Installation 
@@ -35,7 +35,11 @@ A command line Content Management System (CMS) interface that allows users to in
 
 ![git-clone]()
 
-2. In order for the app to function correctly, ensure you have the latest or most stable version of Node.js and that you've run:
+2. In order for the app to function correctly, ensure you have the latest or most stable version of Node.js and that you've created a `.env` file with your MySQL login details.
+
+![env-example]()
+
+3. In your terminal, run:
 
     - `npm install`
     - `npm run start`

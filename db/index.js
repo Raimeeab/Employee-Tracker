@@ -54,6 +54,12 @@ class DB {
         return this.connection.promise().query(strQuery);
     };
     
+    deleteDepartment(){
+        console.log("Reached index.js")
+        let strQuery = `DELETE FROM departments WHERE id = ${pickedDepartment.departmentId}`
+        return this.connection.promise().query(strQuery)
+    }
+
 };
 
 module.exports = new DB(connection);
