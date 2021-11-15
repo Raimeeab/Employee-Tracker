@@ -15,7 +15,7 @@
 
 <a name="description"></a>
 ## 📝 Description
-A command line Content Management System (CMS) interface that allows users to interact with and manipulate information sorted in a database. The aim of this project is to demonstrate my understanding of MySQL as well as improve my knowledge of Inquirer and node.js. 
+A command line Content Management System (CMS) interface that allows users to interact with information sorted in a database. The aim of this project is to demonstrate my understanding of MySQL as well as improve my knowledge of Inquirer and JavaScript.  
 
 ![app-demo]()
 
@@ -29,15 +29,15 @@ A command line Content Management System (CMS) interface that allows users to in
 
 <a name="installation"></a>
 ## ⚙️ Installation 
-*You can download a step-by-step tutorial [here]() by clicking on the `view raw` link*
+*You can find a step-by-step tutorial [here]()*
 
 1. Git clone this repository onto your local machine and navigate to the file on your terminal. *This can also be done by opening the file on Visual Studios and running it through the intergated terminal.*
 
 ![git-clone]()
 
-2. In order for the app to function correctly, ensure you have the latest or most stable version of Node.js and that you've entered your MySQL details into the `.env.Example` and that you rename the file to `.env`.
+2. In order for the app to function correctly, ensure you have the latest or most stable version of Node.js and that you've created a `.env` file with your MySQL login details.
 
-![env-example](./assets/env-demo.png)
+![env-example]()
 
 3. In your terminal, run:
 
@@ -51,11 +51,13 @@ A command line Content Management System (CMS) interface that allows users to in
 <a name="usage"></a>
 ## 🖥 Usage 
 This application allows you to interact with the database by: 
-- viewing the departments, roles and employees in the company 
-- adding departments, roles and employees in the company 
-- deleteing departments, roles and employees 
-- viewing employees by managers 
-- viewing employees by departments 
+- view the departments, roles and employees in the company 
+- add departments, roles and employees in the company 
+- update employee managers 
+- view employees by managers 
+- view employees by departments 
+- delete departments, roles and employees 
+- view the total utlized bugest of a department (combine the salaries of all employees in that department)
 
 <a name="contributors"></a>
 ## 👥 Contributors
@@ -67,7 +69,7 @@ This application allows you to interact with the database by:
 ## 🔖 License
 
 MIT License
-Copyright (c) [2021] [Employee-Tracker]
+Copyright (c) [2021] [note-taker]
 Permission is herby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limiation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject following coditions: 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
 

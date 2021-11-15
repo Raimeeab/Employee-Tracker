@@ -7,114 +7,97 @@ const db = require('../db');
 require('console.table');
 
 const startMenu = async () => {
-    try {
+    const options = [
+        "View all departments", "View all roles",
+        "View all employees", "Add a department",
+        "Add a role", "Add an employee", 
+        "Update employee role", "More choices", "Exit"
+    ]; 
 
-        const options = [
-            "View all departments", "View all roles",
-            "View all employees", "Add a department",
-            "Add a role", "Add an employee", 
-            "Update employee role", "More choices", "Exit"
-        ]; 
-    
-        const startQuestions = [{
-            type: "list",
-            name: "choice",
-            message: "What would you like to do?",
-            choices: options
-        }];
-    
-        const answers = await prompt(startQuestions)
-    
-        switch(answers.choice) {
-            case "View all departments":
-                await viewDepartments();
-                break;
-    
-            case "View all roles":
-                await viewRoles();
-                break;
-    
-            case "View all employees":
-                await viewEmployees();
-                break;
-    
-            case "Add a department":
-                await addDepartment();
-                break;
-            
-            case "Add a role":
-                await addRole();
-                break;
-    
-            case  "Add an employee":
-                await addEmployee();
-                break;
-    
-            case "Update employee role":
-                await updateEmployee();
-                break;
-    
-            case "More choices": 
-                await moreChoices();
-                break;
-    
-            default: 
-                // Clear terminal & end function
-                console.clear();
-                end();
-            return; 
-        };
-    } catch(err) {
-        console.err("An error occurred:", err)
-    }
-};
+    const startQuestions = [{
+        type: "list",
+        name: "choice",
+        message: "What would you like to do?",
+        choices: options
+        
+    }];
+
+    const answers = await prompt(startQuestions)
+
+    switch(answers.choice) {
+        case "View all departments":
+            await viewDepartments();
+            break;
+
+        case "View all roles":
+            await viewRoles();
+            break;
+
+        case "View all employees":
+            await viewEmployees();
+            break;
+
+        case "Add a department":
+            await addDepartment();
+            break;
+        
+        case "Add a role":
+            await addRole();
+            break;
+
+        case  "Add an employee":
+            await addEmployee();
+            break;
+
+        case "Update employee role":
+            await updateEmployee();
+            break;
+
+        case "More choices": 
+            await moreChoices();
+            break;
+
+        default: 
+            // Clear terminal & end function
+            console.clear();
+            end();
+        return; 
+    };
+}
 
 // View departments
 function viewDepartments() { 
-    try {
-        db.viewDepartments()
+    db.viewDepartments()
     .then(([rows]) => {
         let departments = rows;
         console.table(departments);
     })
     .then(() => startMenu());
-    } catch(err) {
-        console.error("An error occurred:", err)
-    }
 };
 
 // View roles
 function viewRoles() { 
-    try {
-        db.viewRoles()
+    db.viewRoles()
     .then(([rows]) => {
         let roles = rows;
         console.table(roles);
     })
-    .then(() => startMenu()); 
-    } catch(err) {
-        console.error("An error occurred:", err);
-    };
+    .then(() => startMenu());
 };
 
 //  View employees
 function viewEmployees() { 
-    try {
-         db.viewEmployees()   
+    db.viewEmployees()   
     .then(([rows]) => {
         let employees = rows;
         console.table(employees);
     })
     .then(() => startMenu());
-    } catch(err) {
-        console.error("An error occurred:", err);
-    };
 };
 
 // Add a department
 function addDepartment() {
-    try {
-          const addDepartment = [{
+    const addDepartment = [{
         type: "text",
         name: "department",
         message: "What is the department name?",        
@@ -128,24 +111,15 @@ function addDepartment() {
         })
         .then(() => viewDepartments());
     });
-    } catch(err) {
-        console.error("An error occurred:", err);
-    };
 };
 
 // Add a role
 function addRole() {
-    try {
-        const addRole = [
+    const addRole = [
         {
             type: "text",
             name: "id",
-            message: "What is the role id? It must be a number",
-            validate: (input) => {
-                let userInput = parseInt(input);
-                return !Number.isNaN(userInput);
-            }
-            
+            message: "What is the role id?"
         },
         {
             type: "text",
@@ -155,11 +129,7 @@ function addRole() {
         {
             type: "text",
             name: "salary",
-            message: "What is the salary? (Can have up to two decimals)",
-            validate: (input) => {
-                let userInput = parseInt(input);
-                return !Number.isNaN(userInput);
-            }
+            message: "What is the salary?",
         },
         {
             type: "text",
@@ -177,16 +147,12 @@ function addRole() {
         })
         .then(() => viewRoles());
     });
-    } catch(err) {
-        console.error("An error occurred:", err);
-    }
-    
 };
 
 // Add an employee
 function addEmployee() {
     try {
-
+        
         //query db to display all managers 
         db.getManagers()
         .then(([rows]) => {
@@ -255,60 +221,55 @@ function addEmployee() {
                 });
             });
         });
-    } catch (err) {
-       console.error("An error occurred:", err);
+    } catch {
+        if(err) throw err; 
     }
 };
 
 // Update employee
 async function updateEmployee() {
-    try {
+    const employees =  await db.viewEmployees();
+    // console.table(employees[0]);
 
-        const employees =  await db.viewEmployees();
-        // console.table(employees[0]);
+    const employeeChoices =  employees[0].map((employees) => {
+        return { 
+            name: employees.first_name + " " + employees.last_name,
+            value: employees.id
+        }; 
+    });
+
+    const selectedEmployee = await prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee would you like to update?",
+            choices: employeeChoices
+        },
+    ]);
+
+    const roles = await db.viewRoles();
+    // console.table(roles[0]);
+
+    const roleChoices = roles[0].map((role) => {
+        return {
+            name: role.title,
+            value: role.id
+        }
+    });
+
+    const newRole = await prompt([
+        {
+            type: "list",
+            name: "roleId",
+            message: "What is their new role?",
+            choices: roleChoices
+        },
+    ]);
     
-        const employeeChoices =  employees[0].map((employees) => {
-            return { 
-                name: employees.first_name + " " + employees.last_name,
-                value: employees.id
-            }; 
-        });
-    
-        const selectedEmployee = await prompt([
-            {
-                type: "list",
-                name: "employeeId",
-                message: "Which employee would you like to update?",
-                choices: employeeChoices
-            },
-        ]);
-    
-        const roles = await db.viewRoles();
-        // console.table(roles[0]);
-    
-        const roleChoices = roles[0].map((role) => {
-            return {
-                name: role.title,
-                value: role.id
-            }
-        });
-    
-        const newRole = await prompt([
-            {
-                type: "list",
-                name: "roleId",
-                message: "What is their new role?",
-                choices: roleChoices
-            },
-        ]);
-        
-        // console.table(selectedEmployee)
-        // console.table(newRole)
-        await db.updateEmployeeDb(selectedEmployee, newRole)
-        await viewEmployees();
-    } catch(err) {
-        console.error("An error occurred:", err);
-    };
+    // console.table(selectedEmployee)
+    // console.table(newRole)
+    await db.updateEmployeeDb(selectedEmployee, newRole)
+    await viewEmployees();
 };
 
 

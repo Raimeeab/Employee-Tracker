@@ -1,7 +1,7 @@
 const connection = require("./connection");
 
 class DB {
-    // Query in each method, connecting to MySql db 
+
     constructor(connection){
         this.connection = connection
     };
@@ -15,7 +15,7 @@ class DB {
     };
 
     viewEmployees(){
-        let strQuery = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary  
+        let strQuery = `SELECT employees.id, employees.first_name, employees.last_name, roles.title  
                         FROM employees
                         JOIN roles
                         ON employees.role_id = roles.id;`
@@ -23,12 +23,14 @@ class DB {
     };
 
     createDepartment(department){
+        console.log(`About to insert ${department} into department table`);
         let strQuery = `INSERT INTO departments (department_name) 
                             VALUES ("${department}");`;
         return this.connection.promise().query(strQuery);
     };
 
     createRole(role){
+        console.log(`About to insert ${role} into roles table`);
         let strQuery = `INSERT INTO roles (id, title, salary, department_id) 
                             VALUES (${role.id}, "${role.role}", ${role.salary}, ${role.departmentId});`;
         return this.connection.promise().query(strQuery);
@@ -68,11 +70,12 @@ class DB {
     };
 
     employeeByManager(pickedManager){
+        console.log("Reached index.js")
         let strQuery = `SELECT employees.role_id, employees.first_name, employees.last_name
                         FROM employees
                         WHERE employees.manager_id = ${pickedManager.managerId}`
         return this.connection.promise().query(strQuery);
-    };
+    }
 
 };
 
